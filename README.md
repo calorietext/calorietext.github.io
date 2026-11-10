@@ -24,6 +24,35 @@ pnpm exec tsc --noEmit
 
 ## GitHub Pages
 
+### Connect the Get Started buttons to Messages
+
+The navigation, hero, and bottom Get Started buttons share one configuration in
+`config/messaging.json`. Leave `enabled` as `false` until the dedicated backend
+and your Sendblue business number have passed a private phone test. The current
+buttons continue to open the demo while setup is incomplete.
+
+When ready, enter the assigned business number in international format (a `+`
+followed by country code and number), set `enabled` to `true`, and publish. Every
+Get Started button becomes an `sms:` link that opens a conversation addressed to
+that number. The visitor must still send their message. The phone and provider
+determine whether delivery uses iMessage or SMS; the link does not force iMessage.
+An invalid enabled number fails the build rather than opening the wrong link.
+
+The QR image opens this website so phone visitors can use Get Started. Computers
+need a configured messaging application to handle the link; phone testing is
+required before opening the pilot publicly.
+
+Only the public business number belongs in this repository. OpenAI, Sendblue,
+database, encryption, and webhook secrets belong in the separate backend host's
+environment settings, never in browser code or GitHub Pages.
+
+The reference project is `https://github.com/pontusab/caltext`. Its current public
+tree has no license file or license declaration in its README. Confirm reuse
+permission before copying its implementation. This website's messaging-link
+implementation is independently written.
+
+### Build and deploy
+
 ```sh
 pnpm build:pages
 ```

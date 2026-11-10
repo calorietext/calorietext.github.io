@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { sitePath } from "../lib/site-path";
+import { getMessagingHref } from "../lib/messaging";
+import messagingConfig from "../config/messaging.json";
 import { BarChart3, BellRing, Camera, Check, ChevronLeft, ChevronRight, Code2, LockKeyhole, MessageCircle, Mic, Plus, Signal, Video, Volume2, VolumeX, Wifi, X } from "lucide-react";
 
 const features = [
@@ -21,7 +23,14 @@ function Logo({ small = false }: { small?: boolean }) {
   return <span className={`app-logo ${small ? "small" : ""}`} aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="8.7" stroke="currentColor" strokeWidth="2.3" strokeDasharray="2.3 4.6" strokeLinecap="round"/><circle cx="16" cy="16" r="2.1" fill="currentColor"/></svg></span>;
 }
 function MessageIcon() { return <span className="message-icon" aria-hidden="true"><MessageCircle size={20} fill="white" strokeWidth={0}/></span>; }
-function StartButton({ onClick, compact = false }: { onClick: () => void; compact?: boolean }) { return <button className={`start-button ${compact ? "compact" : ""}`} onClick={onClick}>{!compact && <MessageIcon/>}<span>Get Started</span></button>; }
+const messagingHref = getMessagingHref(messagingConfig);
+function StartButton({ onClick, compact = false }: { onClick: () => void; compact?: boolean }) {
+  const className = `start-button ${compact ? "compact" : ""}`;
+  const content = <>{!compact && <MessageIcon/>}<span>Get Started</span></>;
+  return messagingHref
+    ? <a className={className} href={messagingHref} aria-label="Get started: open Messages to Calorietext">{content}</a>
+    : <button className={className} onClick={onClick}>{content}</button>;
+}
 
 function StatusBar({ time }: { time: string }) { return <div className="status-bar"><b>{time}</b><div className="dynamic-island"/><span><Signal size={13} fill="currentColor"/><Wifi size={12}/><i className="battery"/></span></div>; }
 function Summary() { return <div className="bubble incoming summary"><p>Here’s your day, at a glance ✨</p><div className="meal-row"><span>☀️ Protein oats</span><span>320 kcal</span></div><div className="meal-row"><span>🥗 Chicken bowl</span><span>410 kcal</span></div><div className="meal-row"><span>🍫 Afternoon snack</span><span>180 kcal</span></div><div className="meal-row"><span>🥘 Dinner</span><span>510 kcal</span></div><div className="summary-total"><b>1,420</b><span> / 2,100 kcal</span></div><div className="progress-bar"><i/></div><div className="macro-row"><span><b>112g</b> protein</span><span><b>148g</b> carbs</span><span><b>42g</b> fat</span></div><p>You’ve got 680 kcal left. A little room for something good. 🙌</p></div>; }
