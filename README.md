@@ -34,10 +34,6 @@ This builds a static Next.js export into `out/`. The default base path is empty,
 
 For a future custom domain, keep the base path empty and regenerate `public/qr.svg` for the new address. Custom domain registration and DNS setup are separate steps.
 
-## Original private preview
-
-`pnpm build` retains the Vinext/Cloudflare build used by the original private preview. Its identity is preserved in `.openai/hosting.json`. GitHub Pages uses the separate `build:pages` command and does not need Sites credentials or a Worker. Provider credentials and local runtime state are excluded from Git.
-
 ## Assets and design
 
 - User-supplied visual reference: https://caltext-frkp1pbad-midday.vercel.app/en
