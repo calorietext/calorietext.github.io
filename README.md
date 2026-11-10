@@ -4,13 +4,13 @@ The standalone Calorietext marketing website and interactive product demo.
 
 **Public demo:** https://calorietext.github.io/
 
-The actual fitness application and its backend will be built separately. This repository does not run live AI, SMS, iMessage, phone calls, accounts, or payments.
+The AI texting backend is maintained separately in `kennethokereke100/Calorietext`. This static website opens a conversation with its public pilot line; it does not host AI, messaging servers, accounts, or payments.
 
 ## Website features
 
 Responsive landing page, scroll-driven iPhone demo, three interactive feature tabs, optional sound, accessible FAQ accordion, sample messaging modal, QR navigation, and preview-specific privacy and terms pages. English landing routes: `/` and `/en`.
 
-Sample conversations and nutrition values are illustrative. Get Started opens the demo; it does not contact a phone number or start a subscription.
+Sample conversations and nutrition values are illustrative. Get Started opens the visitor’s messaging app addressed to the Calorietext pilot line. The visitor must send a message; no subscription is started. AI replies are restricted to approved, verified testers. View the sample demo remains available separately.
 
 ## Development
 
@@ -27,9 +27,10 @@ pnpm exec tsc --noEmit
 ### Connect the Get Started buttons to Messages
 
 The navigation, hero, and bottom Get Started buttons share one configuration in
-`config/messaging.json`. Leave `enabled` as `false` until the dedicated backend
-and your Sendblue business number have passed a private phone test. The current
-buttons continue to open the demo while setup is incomplete.
+`config/messaging.json`, now enabled for the tested Sendblue pilot line at the
+owner’s request. This publishes only the business number; it does not expand the
+backend allowlist or verify new contacts. Set `enabled` to `false` to return the
+buttons to the sample demo.
 
 When ready, enter the assigned business number in international format (a `+`
 followed by country code and number), set `enabled` to `true`, and publish. Every
@@ -38,9 +39,9 @@ that number. The visitor must still send their message. The phone and provider
 determine whether delivery uses iMessage or SMS; the link does not force iMessage.
 An invalid enabled number fails the build rather than opening the wrong link.
 
-The QR image opens this website so phone visitors can use Get Started. Computers
-need a configured messaging application to handle the link; phone testing is
-required before opening the pilot publicly.
+The QR image opens this website so phone visitors can use Get Started. Clicking the QR image also opens
+the messaging link. Computers need a configured messaging application; visitors
+can scan the QR code to continue on their phone. Public onboarding is not enabled.
 
 Only the public business number belongs in this repository. OpenAI, Sendblue,
 database, encryption, and webhook secrets belong in the separate backend host's

@@ -7,3 +7,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 .feature-tabs{position:fixed;top:auto;bottom:26px;left:50%;transform:translateX(-50%)}@media(max-width:640px){.feature-tabs{top:auto;bottom:18px}}
+
+.demo-preview-link{border:0;background:transparent;color:var(--ink);font:inherit;font-size:12px;text-decoration:underline;text-underline-offset:3px;padding:8px;cursor:pointer}.demo-preview-link:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:4px}
